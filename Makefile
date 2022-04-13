@@ -84,6 +84,23 @@ ssl\:cert:
 		--no-eff-email \
 		--standalone
 
+# Issue staging SSL certificates according to the environment variables
+ssl\:cert\:staging:
+	docker run \
+		--rm \
+		--interactive \
+		--tty \
+		--volume ${CURDIR}/reverse-proxy/ssl:/etc/letsencrypt:rw \
+		--publish 80:80 \
+		certbot/certbot \
+		certonly \
+		--domains ${LETSENCRYPT_DOMAINS} \
+		--email ${LETSENCRYPT_EMAIL} \
+		--agree-tos \
+		--no-eff-email \
+		--standalone \
+		--staging
+
 # Issue testing SSL certificates according to the environment variables
 ssl\:test:
 	docker run \
