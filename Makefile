@@ -78,8 +78,8 @@ ssl\:cert:
 		--publish 80:80 \
 		certbot/certbot \
 		certonly \
-		--domains ${CERTBOT_DOMAINS} \
-		--email ${CERTBOT_EMAIL} \
+		--domains ${LETSENCRYPT_DOMAINS} \
+		--email ${LETSENCRYPT_EMAIL} \
 		--agree-tos \
 		--no-eff-email \
 		--standalone
@@ -94,8 +94,8 @@ ssl\:test:
 		--publish 80:80 \
 		certbot/certbot \
 		certonly \
-		--domains ${CERTBOT_DOMAINS} \
-		--email ${CERTBOT_EMAIL} \
+		--domains ${LETSENCRYPT_DOMAINS} \
+		--email ${LETSENCRYPT_EMAIL} \
 		--agree-tos \
 		--no-eff-email \
 		--standalone \
