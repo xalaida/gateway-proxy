@@ -1,8 +1,22 @@
+# Installation
+
+1. Copy `.env.prod` file to `.env`
+
+2. Create gateway network
+
+```
+# Make command
+make gateway
+
+# Raw command
+docker network create gateway
+```
+
 # TODO
 
 - [ ] add install.sh
-    - network
     - make .env
+    - network
     - generate ssl certificates
     - generate dh params
     - generate templates from stubs

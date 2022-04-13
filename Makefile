@@ -51,6 +51,10 @@ env\:dev:
 env\:prod:
 	cp ./.env.prod ./.env
 
+# Create gateway network
+network:
+	docker network create gateway
+
 # Reload the Nginx service
 reload:
 	docker-compose -f ${COMPOSE_FILE} exec reverse-proxy nginx -s reload
