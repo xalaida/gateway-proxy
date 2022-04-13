@@ -68,7 +68,7 @@ certbot:
 # SSL
 #-----------------------------------------------------------
 
-# Issue SSL certificates according to the environment variables (TODO: use staging variable from .env)
+# Issue SSL certificates according to the environment variables
 ssl\:cert:
 	docker run \
 		--rm \
