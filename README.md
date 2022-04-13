@@ -20,7 +20,7 @@ LETSENCRYPT_STAGING=false
 It will be used for all proxied services.
 
 ```bash
-make gateway
+make network
 ```
 
 **Step 3.** Issue certificate.
