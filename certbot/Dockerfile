@@ -1,5 +1,5 @@
 # Image
-FROM certbot/certbot:latest
+FROM certbot/certbot:v1.26.0
 
 # Install Curl & jq
 RUN apk add --update curl jq && \
