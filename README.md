@@ -66,7 +66,7 @@ make up
     - generate local cert (?)
 
 
-## Sources
+## Links
 
 - https://github.com/docker-library/docs/tree/master/nginx
 - https://eff-certbot.readthedocs.io/en/stable/install.html#running-with-docker
