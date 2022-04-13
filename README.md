@@ -33,7 +33,7 @@ make ssl:dh
 
 **Step 5.** Create templates for desired hosts.
 
-**Step 6.** Build and start containers.
+**Step 6.** Build containers.
 
 ```bash
 make build
