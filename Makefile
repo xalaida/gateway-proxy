@@ -63,6 +63,10 @@ reload:
 certbot:
 	docker-compose -f ${COMPOSE_FILE} exec certbot /bin/sh
 
+# Copy stubs into templates folder
+copy\:stubs:
+	cp ./reverse-proxy/stubs/*.conf ./reverse-proxy/sites-enabled/.
+
 
 #-----------------------------------------------------------
 # SSL
