@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   reverse-proxy:
-    image: ${IMAGE_REGISTRY:-local}/gateway-reverse-proxy:${IMAGE_TAG:-latest}
     build:
       context: ./reverse-proxy
       dockerfile: Dockerfile
+    image: ${IMAGE_REGISTRY:-local}/gateway-reverse-proxy:${IMAGE_TAG:-latest}
     volumes:
       # SSL certificates folder (shared with certbot service)
       - ./reverse-proxy/ssl:/etc/nginx/ssl:ro
@@ -21,10 +21,10 @@ services:
     restart: unless-stopped
 
   certbot:
-    image: ${IMAGE_REGISTRY:-local}/gateway-certbot:${IMAGE_TAG:-latest}
     build:
       context: ./certbot
       dockerfile: Dockerfile
+    image: ${IMAGE_REGISTRY:-local}/gateway-certbot:${IMAGE_TAG:-latest}
     environment:
       NGINX_SERVICE: reverse-proxy
     volumes:
