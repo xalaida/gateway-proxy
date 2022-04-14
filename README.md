@@ -51,7 +51,7 @@ make up
 # TODO
 
 - [ ] add install script
-- [ ] www redirect to non-www
+- [ ] add proxy mapping in case when 2 layers of proxy is used (reverse-proxy -> php-fpm-proxy -> php)
 - [ ] use staging env variable
 - [ ] add command to reissue cert according to new params
 - [ ] first time generate cert using `--dry-run` option to ensure everything is ok
