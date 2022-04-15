@@ -6,7 +6,7 @@ services:
       context: ./reverse-proxy
       dockerfile: Dockerfile
     volumes:
-      - ./reverse-proxy/ssl:/etc/nginx/ssl:ro
+      - ./reverse-proxy/dev/ssl:/etc/nginx/ssl:ro
     ports:
       - "443:443"
       - "80:80"
