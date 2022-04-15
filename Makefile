@@ -51,7 +51,7 @@ env\:dev:
 env\:prod:
 	cp ./.env.prod ./.env
 
-# Create gateway network
+# Create shared gateway network
 network:
 	docker network create gateway
 
