@@ -156,6 +156,10 @@ swarm\:ps:
 # Bench
 #-----------------------------------------------------------
 
+# Live stream a container’s runtime metrics
+stats:
+	docker stats
+
 # Run benchmarking over the gateway (requires Apache Bench tool: apt-get install -y apache2-utils)
 bench:
 	ab -c 50 -n 5000 http://localhost/
