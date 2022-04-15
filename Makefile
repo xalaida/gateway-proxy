@@ -137,7 +137,7 @@ ssl\:ls:
 
 # Deploy the stack
 swarm\:deploy:
-	docker stack deploy --compose-file docker-compose.yml gateway
+	docker stack deploy --compose-file ${COMPOSE_FILE} gateway
 
 # Remove/stop the stack
 swarm\:rm:

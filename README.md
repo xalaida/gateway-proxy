@@ -63,9 +63,9 @@ make up
   - [ ] add logrotate 
   - [ ] forward letsencrypt logs to docker collector
   - [ ] integrate with prometheus
-- [ ] add dev env
-    - filling /etc/hosts
-    - generate local cert (?)
+- [ ] filling /etc/hosts
+- [ ] generate local cert
+- [ ] fix prod env
 
 
 ## Links
