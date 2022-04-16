@@ -60,6 +60,9 @@ make up
 
 # TODO
 
+- [ ] fix case when proxy crashes when one upstream not found:
+  - https://serverfault.com/questions/700894/make-nginx-ignore-site-config-when-its-upstream-cannot-be-reached
+  - https://gist.github.com/dancheskus/8d26823d0f5633e9dde63d150afb40b2
 - [ ] add install script
 - [ ] add proxy mapping in case when 2 layers of proxy is used (reverse-proxy -> php-fpm-proxy -> php)
 - [ ] use staging env variable
