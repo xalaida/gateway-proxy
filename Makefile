@@ -5,6 +5,9 @@
 # Include file with .env variables if exists
 -include .env
 
+# Define default values for variables
+COMPOSE_FILE ?= docker-compose.yml
+
 # Start containers
 up:
 	docker-compose -f ${COMPOSE_FILE} up -d
@@ -21,7 +24,7 @@ build:
 update: build up
 
 # Force the update process
-update\:force:
+update.force:
 	docker-compose -f ${COMPOSE_FILE} up -d --build --force-recreate
 
 # Show list of running containers
@@ -43,14 +46,6 @@ logs:
 fl:
 	docker-compose -f ${COMPOSE_FILE} logs -f
 
-# Init variables for development environment
-env\:dev:
-	cp ./.env.dev ./.env
-
-# Init variables for production environment
-env\:prod:
-	cp ./.env.prod ./.env
-
 # Create shared gateway network
 network:
 	docker network create gateway
@@ -63,9 +58,21 @@ reload:
 certbot:
 	docker-compose -f ${COMPOSE_FILE} exec certbot /bin/sh
 
-# Copy stubs into templates folder
-copy\:stubs:
-	cp ./reverse-proxy/stubs/*.conf ./reverse-proxy/sites-enabled/.
+# Init variables for development environment
+env.dev:
+	cp ./.env.dev ./.env
+
+# Init variables for production environment
+env.prod:
+	cp ./.env.prod ./.env
+
+# Copy dev stubs into templates folder
+copy.stubs.dev:
+	cp ./reverse-proxy/dev/stubs/*.conf ./reverse-proxy/dev/sites-enabled/.
+
+# Copy prod stubs into templates folder
+copy.stubs.prod:
+	cp ./reverse-proxy/prod/stubs/*.conf ./reverse-proxy/prod/sites-enabled/.
 
 
 #-----------------------------------------------------------
@@ -73,48 +80,23 @@ copy\:stubs:
 #-----------------------------------------------------------
 
 # Issue SSL certificates according to the environment variables
-ssl\:cert:
-	docker run \
-		--rm \
-		--interactive \
-		--tty \
-		--volume ${CURDIR}/reverse-proxy/ssl:/etc/letsencrypt:rw \
+ssl.cert:
+	docker-compose -f ${COMPOSE_FILE} run --rm --no-deps \
 		--publish 80:80 \
-		certbot/certbot \
-		certonly \
+		certbot \
+		certbot certonly \
 		--domains ${LETSENCRYPT_DOMAINS} \
 		--email ${LETSENCRYPT_EMAIL} \
 		--agree-tos \
 		--no-eff-email \
 		--standalone
 
-# Issue staging SSL certificates according to the environment variables
-ssl\:cert\:staging:
-	docker run \
-		--rm \
-		--interactive \
-		--tty \
-		--volume ${CURDIR}/reverse-proxy/ssl:/etc/letsencrypt:rw \
-		--publish 80:80 \
-		certbot/certbot \
-		certonly \
-		--domains ${LETSENCRYPT_DOMAINS} \
-		--email ${LETSENCRYPT_EMAIL} \
-		--agree-tos \
-		--no-eff-email \
-		--standalone \
-		--staging
-
 # Issue testing SSL certificates according to the environment variables
-ssl\:test:
-	docker run \
-		--rm \
-		--interactive \
-		--tty \
-		--volume ${CURDIR}/reverse-proxy/ssl:/etc/letsencrypt:rw \
+ssl.cert.test:
+	docker-compose -f ${COMPOSE_FILE} run --rm --no-deps \
 		--publish 80:80 \
-		certbot/certbot \
-		certonly \
+		certbot \
+		certbot certonly \
 		--domains ${LETSENCRYPT_DOMAINS} \
 		--email ${LETSENCRYPT_EMAIL} \
 		--agree-tos \
@@ -122,12 +104,25 @@ ssl\:test:
 		--standalone \
 		--dry-run
 
+# Issue staging SSL certificates according to the environment variables
+ssl.cert.staging:
+	docker-compose -f ${COMPOSE_FILE} run --rm --no-deps \
+		--publish 80:80 \
+		certbot \
+		certbot certonly \
+		--domains ${LETSENCRYPT_DOMAINS} \
+		--email ${LETSENCRYPT_EMAIL} \
+		--agree-tos \
+		--no-eff-email \
+		--standalone \
+		--staging
+
 # Generate a 2048-bit DH parameter file
-ssl\:dh:
-	sudo openssl dhparam -out ./reverse-proxy/ssl/dhparam.pem 2048
+ssl.dh:
+	sudo openssl dhparam -out ./reverse-proxy/prod/ssl/dhparam.pem 2048
 
 # Show the list of registered certificates
-ssl\:ls:
+ssl.ls:
 	docker-compose -f ${COMPOSE_FILE} run --rm --entrypoint "certbot certificates" certbot
 
 
@@ -136,19 +131,19 @@ ssl\:ls:
 #-----------------------------------------------------------
 
 # Deploy the stack
-swarm\:deploy:
+swarm.deploy:
 	docker stack deploy --compose-file ${COMPOSE_FILE} gateway
 
 # Remove/stop the stack
-swarm\:rm:
+swarm.rm:
 	docker stack rm gateway
 
 # List of stack services
-swarm\:services:
+swarm.services:
 	docker stack services gateway
 
 # List the tasks in the stack
-swarm\:ps:
+swarm.ps:
 	docker stack ps gateway
 
 
