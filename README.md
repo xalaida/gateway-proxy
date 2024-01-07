@@ -57,28 +57,6 @@ make build
 make up
 ```
 
-
-# TODO
-
-- [ ] fix case when proxy crashes when one upstream not found:
-  - https://serverfault.com/questions/700894/make-nginx-ignore-site-config-when-its-upstream-cannot-be-reached
-  - https://gist.github.com/dancheskus/8d26823d0f5633e9dde63d150afb40b2
-- [ ] add install script
-- [ ] add proxy mapping in case when 2 layers of proxy is used (reverse-proxy -> php-fpm-proxy -> php)
-- [ ] use staging env variable
-- [ ] add command to reissue cert according to new params
-- [ ] add possibility to automatically generate conf from stub (default nginx template engine very often breaks with variables inside strings)
-- [ ] generate overlay network for swarm
-- [ ] configure logging
-  - [ ] probably disable access.log
-  - [ ] forward nginx logs from nginx.conf into /std/err
-  - [ ] add logrotate 
-  - [ ] forward letsencrypt logs to docker collector
-  - [ ] integrate with prometheus
-- [ ] filling /etc/hosts
-- [ ] generate local cert
-
-
 ## Links
 
 - https://github.com/docker-library/docs/tree/master/nginx
